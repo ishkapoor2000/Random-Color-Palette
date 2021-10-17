@@ -29,5 +29,10 @@ function addColor() {
 		var newColor = randomHexColorCode();
 		e.style.backgroundColor = newColor;
 		e.children[0].innerHTML = newColor;
+		e.onclick = () => {
+			document.getElementById("colorInput").setAttribute("value", newColor);
+			document.getElementById("colorInput").select();
+			document.execCommand("copy");
+		}
 	})
 }
