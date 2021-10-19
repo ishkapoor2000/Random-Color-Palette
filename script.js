@@ -10,29 +10,23 @@ for (let i = 1; i <= 100; i++) {
 const btn = document.querySelector(".btn");
 const randomColorBlock = document.querySelectorAll(".box");
 
-function randomHexColorCode() {
-	var chars = "0123456789abcef";
-	var colorLength = 6;
-	var color = "";
-
-	for (var i = 0; i < colorLength; i++) {
-		var randomColor = Math.floor(Math.random() * chars.length);
-		color += chars.substring(randomColor, randomColor + 1);
-	}
-
-	return "#" + color;
-
-}
+const randomHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`;
 
 function addColor() {
 	randomColorBlock.forEach(e => {
-		var newColor = randomHexColorCode();
+		var newColor = randomHex();
 		e.style.backgroundColor = newColor;
 		e.children[0].innerHTML = newColor;
 		e.onclick = () => {
 			document.getElementById("colorInput").setAttribute("value", newColor);
 			document.getElementById("colorInput").select();
 			document.execCommand("copy");
+			// navigator.clipboard
+			// 	.writeText(newColor)
+			// 	.then(
+			// 		success => console.log("text copied"),
+			// 		err => console.log("error copying text")
+			// 	);
 		}
 	})
 }
